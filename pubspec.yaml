@@ -37,6 +37,8 @@ dev_dependencies:
 
   flutter_lints: ^2.0.0
 flutter:
+
+  
   uses-material-design: true
   assets:
     - assets/images/
@@ -55,3 +57,9 @@ flutter:
     - assets/images/pokemons_generations/generation_8/
     - assets/lotties/
     - assets/images/pokemons_types/20/water.png
+
+
+  fonts:
+  - family: circular
+    fonts: 
+      - asset: assets/fonts/CircularStd-Book.otf
