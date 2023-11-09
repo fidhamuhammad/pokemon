@@ -42,15 +42,15 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     hSpace(250),
                     Heading(text: 'Log In', size: TextSizes.headingSize, weight: FontWeight.bold, color: Colors.white),
                     hSpace(20),
-                    PokeTextField(
-                      prefixIcon: Icons.email_outlined,
-                    label: 'your email',
-                    ),  
-                    hSpace(20),
-                    PokeTextField(
-                      prefixIcon: Icons.email_outlined,
-                    label: 'verification code',
-                    ),
+                    // PokeTextField(
+                    //   prefixIcon: Icons.email_outlined,
+                    // label: 'your email',
+                    // ),  
+                    // hSpace(20),
+                    // PokeTextField(
+                    //   prefixIcon: Icons.email_outlined,
+                    // label: 'verification code',
+                    // ),
                     hSpace(20),
                   PrimaryButton(
                       label: 'Next', 

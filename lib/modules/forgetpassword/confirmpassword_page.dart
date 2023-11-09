@@ -1,4 +1,5 @@
-import 'package:app/modules/Login/login_page.dart';
+ 
+import 'package:app/modules/authentication/Login/login_page.dart';
 import 'package:app/shared/ui/widgets/heading.dart';
 import 'package:app/shared/ui/widgets/primaryButton.dart';
 import 'package:app/shared/ui/widgets/textformfield.dart';
@@ -19,49 +20,49 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
          final _deviceHeight = MediaQuery.of(context).size.height;
     final _deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-       body: SingleChildScrollView(
-        child: Container(
-          height: _deviceHeight,
-          width: _deviceWidth,
+      //  body: SingleChildScrollView(
+      //   child: Container(
+      //     height: _deviceHeight,
+      //     width: _deviceWidth,
          
-         color: const Color.fromARGB(255, 9, 44, 72),
+      //    color: const Color.fromARGB(255, 9, 44, 72),
 
           
-          child:  Center(
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 40,vertical: 60),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
-                ),
-                child: Column(
+      //     child:  Center(
+      //         child: Container(
+      //           padding: EdgeInsets.symmetric(horizontal: 40,vertical: 60),
+      //           decoration: BoxDecoration(
+      //             color: Colors.black.withOpacity(0.6),
+      //           ),
+      //           child: Column(
                   
-                  children: [
-                    hSpace(250),
-                    Heading(text: 'Log In', size: TextSizes.headingSize, weight: FontWeight.bold, color: Colors.white),
-                    hSpace(20),
-                    PokeTextField(
-                      prefixIcon: Icons.email_outlined,
-                    label: 'new password',
-                    ),  
-                    hSpace(20),
-                    PokeTextField(
-                      prefixIcon: Icons.email_outlined,
-                    label: 'confirm password',
-                    ),
-                    hSpace(20),
-                    PrimaryButton(
-                      label: 'Confirm',
-                       onPressed:  () {
-                         Navigator.push(context,MaterialPageRoute(builder:  (context) => LoginScreen(),));
-                       },
-                        width:100)
+      //             children: [
+      //               hSpace(250),
+      //               Heading(text: 'Log In', size: TextSizes.headingSize, weight: FontWeight.bold, color: Colors.white),
+      //               hSpace(20),
+      //               PokeTextField(
+      //                 prefixIcon: Icons.email_outlined,
+      //               label: 'new password',
+      //               ),  
+      //               hSpace(20),
+      //               PokeTextField(
+      //                 prefixIcon: Icons.email_outlined,
+      //               label: 'confirm password',
+      //               ),
+      //               hSpace(20),
+      //               PrimaryButton(
+      //                 label: 'Confirm',
+      //                  onPressed:  () {
+      //                    Navigator.push(context,MaterialPageRoute(builder:  (context) => LoginScreen(),));
+      //                  },
+      //                   width:100)
                    
-                  ],
-                ),
-              ),
-            ),
-        ),
-      ),
+      //             ],
+      //           ),
+      //         ),
+      //       ),
+      //   ),
+      // ),
     );
   }
 }

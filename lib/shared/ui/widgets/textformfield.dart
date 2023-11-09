@@ -7,12 +7,16 @@ class PokeTextField extends StatefulWidget {
     required this.label,
     required this.prefixIcon,
     this.isPassword = false,
+    required this.textController,
+    required this.TextInputType,
     super.key,
   });
 
   final String label;
   final IconData prefixIcon;
   final bool? isPassword;
+  final TextEditingController textController;
+  final TextInputType;
 
   @override
   State<PokeTextField> createState() => _PokeTextFieldState();
@@ -22,6 +26,8 @@ class _PokeTextFieldState extends State<PokeTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      keyboardType: TextInputType.number,
+      controller: widget.textController,
       style: TextStyle(
         fontFamily: 'circular',
         color: FormColors.fieldTextcolor,
