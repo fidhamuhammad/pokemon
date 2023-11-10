@@ -78,7 +78,7 @@ class SignUpPage extends StatelessWidget {
                     children: [
                       hSpace(_deviceHeight * 0.11),
                       Heading(
-                          text: 'Sign Up',
+                          text: 'SignUp',
                           size: TextSizes.headingSize,
                           weight: FontWeight.bold,
                           color: Colors.white),
