@@ -1,6 +1,7 @@
  import 'package:app/modules/Login/login_page.dart';
 import 'package:app/shared/ui/widgets/heading.dart';
 import 'package:app/shared/ui/widgets/primaryButton.dart';
+import 'package:app/shared/ui/widgets/textButton.dart';
 import 'package:app/shared/ui/widgets/textformfield.dart';
 import 'package:app/shared/utils/sizes.dart';
 import 'package:app/shared/utils/spacer.dart';
@@ -23,38 +24,45 @@ class SignUpPage extends StatefulWidget {
         child: Container(
           height: _deviceHeight,
           width: _deviceWidth,
-          decoration: BoxDecoration(
-      
-        image: DecorationImage(image: NetworkImage('https://www.colorwallpapers.com/uploads/wallpaper/cute-pokemon-phone-wallpapers/width-853/wZsPW229SgOq-cool-pokemon-phone-wallpapers-high-size.png')),
+          decoration: BoxDecoration(     
+          image: DecorationImage(
+          image: NetworkImage('https://www.chromethemer.com/wallpapers/google-pixel/images/640/pokemon-google-pixel-wallpaper.png',          
+        ),
+        fit: BoxFit.cover,
+        ),
+        // image: DecorationImage(
+        //   image: NetworkImage(
+        //     'https://www.chromethemer.com/wallpapers/google-pixel/images/640/pokemon-gooe-pixel-wallpaper.png',            
+        //     )),
          // color: Colors.red,
           ),
           
           child:  Center(
               child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 40,vertical: 60),
+                padding: EdgeInsets.symmetric(horizontal: 40,vertical: 20),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.5),
                 ),
                 child: Column(
                   
                   children: [
-                    hSpace(200),
-                    Heading(text: 'Sign Up', size: TextSizes.headingSize, weight: FontWeight.bold, color: Colors.white),
-                    hSpace(20),
+                    hSpace(250),
+                    // Heading(text: 'Sign Up', size: TextSizes.headingSize, weight: FontWeight.bold, color: Colors.white),
+                    // hSpace(20),
                     PokeTextField(
-                      prefixIcon: Icons.email_outlined,
+                      prefixIcon: Icons.verified_outlined,
                     label: 'Username',
                     ),
                      hSpace(20),
                     PokeTextField(
                       isPassword: true,
-                      prefixIcon: Icons.lock_outlined,
+                      prefixIcon: Icons.phone,
                     label: 'Phone number',
                     ),
                      hSpace(20),
                     PokeTextField(
                       isPassword: true,
-                      prefixIcon: Icons.lock_outlined,
+                      prefixIcon: Icons.email_outlined,
                     label: 'Email_id',
                     ),
                     
@@ -71,9 +79,15 @@ class SignUpPage extends StatefulWidget {
                     label: 'ConfirmPassword',
                     ),
                     hSpace(20),
-                    PrimaryButton(label: 'Log In',width: 100,onPressed: () {
+                    PrimaryButton(label: 'Sign Up',width: 100,onPressed: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
                     },),
+                    hSpace(20),
+                     MyTextButton(
+                      label: 'Already have an account?Login here!', width: 300,
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder:  (context) => LoginScreen(),));
+                      },)
                    
                   ],
                 ),

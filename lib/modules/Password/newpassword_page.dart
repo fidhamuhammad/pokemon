@@ -6,16 +6,15 @@ import 'package:app/shared/utils/sizes.dart';
 import 'package:app/shared/utils/spacer.dart';
 import 'package:flutter/material.dart';
 
-class ConfirmPassword extends StatefulWidget {
-  const ConfirmPassword({super.key});
+class NewPassword extends StatefulWidget {
+  const NewPassword({super.key});
 
   @override
-  State<ConfirmPassword> createState() => _ConfirmPasswordState();
+  State<NewPassword> createState() => _NewPasswordState();
 }
 
-class _ConfirmPasswordState extends State<ConfirmPassword> {
-  @override
-  Widget build(BuildContext context) {
+class _NewPasswordState extends State<NewPassword> {
+   Widget build(BuildContext context) {
          final _deviceHeight = MediaQuery.of(context).size.height;
     final _deviceWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -24,7 +23,7 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
           height: _deviceHeight,
           width: _deviceWidth,
          
-         color: const Color.fromARGB(255, 9, 44, 72),
+         color: Color.fromARGB(255, 174, 232, 48),
 
           
           child:  Center(
@@ -37,15 +36,15 @@ class _ConfirmPasswordState extends State<ConfirmPassword> {
                   
                   children: [
                     hSpace(250),
-                    Heading(text: 'Log In', size: TextSizes.headingSize, weight: FontWeight.bold, color: Colors.white),
+                    Heading(text: 'Create new password!', size: TextSizes.headingSize, weight: FontWeight.bold, color: Colors.white),
                     hSpace(20),
                     PokeTextField(
-                      prefixIcon: Icons.email_outlined,
+                      prefixIcon: Icons.password_outlined,
                     label: 'new password',
                     ),  
                     hSpace(20),
                     PokeTextField(
-                      prefixIcon: Icons.email_outlined,
+                      prefixIcon: Icons.remove_red_eye,
                     label: 'confirm password',
                     ),
                     hSpace(20),

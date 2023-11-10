@@ -1,5 +1,4 @@
 import 'package:app/shared/utils/sizes.dart';
-import 'package:app/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
@@ -33,7 +32,8 @@ class PrimaryButton extends StatelessWidget {
         
       
         style: ElevatedButton.styleFrom(
-          shape: StadiumBorder(),
+           
+         shape:StadiumBorder(),
           backgroundColor: const Color.fromARGB(255, 229, 175, 12),
           padding: primaryButtonPadding
         ),
