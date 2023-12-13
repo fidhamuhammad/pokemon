@@ -42,12 +42,14 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
   late AnimationController _animationController;
   late PageController _pageController;
   late AudioPlayer player;
+  
 
   @override
   void initState() {
     super.initState();
     _pokemonStore = GetIt.instance<PokemonStore>();
     _pokemonDetailsStore = PokemonDetailsStore();
+ 
     _pageController =
         PageController(initialPage: _pokemonStore.index, viewportFraction: 0.4);
 
@@ -117,7 +119,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                   right: 80,
                   top: padding.top,
                   child: Opacity(
-                    opacity: 0.2,
+                    opacity: 0.5,
                     child: CustomPaint(
                       size: Size(57, (57 * 0.543859649122807).toDouble()),
                       painter: BackgroundDotsPainter(),
@@ -237,7 +239,9 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                                       topLeft: Radius.circular(30),
                                       topRight: Radius.circular(30),
                                     ),
-                                    color: Theme.of(context).backgroundColor,
+                                    color:
+                                        // Colors.grey,
+                                        Theme.of(context).colorScheme.outline,
                                   ),
                                   height: 80,
                                 ),
@@ -273,7 +277,7 @@ class _PokemonDetailsPageState extends State<PokemonDetailsPage>
                                               painter: PokeballLogoPainter(
                                                   color: Theme.of(context)
                                                       .backgroundColor
-                                                      .withOpacity(0.3)),
+                                                      .withOpacity(0.2)),
                                             ),
                                           ),
                                         ),

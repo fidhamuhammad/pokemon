@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:app/shared/stores/pokemon_store/pokemon_store.dart';
 import 'package:app/theme/app_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PokemonTitleInfoWidget extends StatelessWidget {
   final _pokemonStore = GetIt.instance<PokemonStore>();
@@ -21,21 +22,29 @@ class PokemonTitleInfoWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Observer(builder: (_) {
-                return Text(
-                  _pokemonStore.pokemon!.name,
-                  style: textTheme.headline1?.copyWith(
-                    fontSize: 36,
-                    fontWeight: FontWeight.w900,
-                    color: AppTheme.getColors(context).pokemonDetailsTitleColor,
-                  ),
-                );
+                return Text(_pokemonStore.pokemon!.name,
+                    style: GoogleFonts.lora(
+                        color: Colors.white,
+                        fontSize: 36,
+                        fontWeight: FontWeight.bold)
+                    // style: textTheme.headline1?.copyWith(
+                    //   fontSize: 36,
+                    //   fontWeight: FontWeight.w900,
+                    //   color: AppTheme.getColors(context).pokemonDetailsTitleColor,
+                    // ),
+                    );
               }),
               Observer(builder: (_) {
                 return Text("#${_pokemonStore.pokemon!.number}",
-                    style: textTheme.headline4?.copyWith(
-                      color:
-                          AppTheme.getColors(context).pokemonDetailsTitleColor,
-                    ));
+                    style: GoogleFonts.lora(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal)
+                    // style: textTheme.headline4?.copyWith(
+                    //   color:
+                    //       AppTheme.getColors(context).pokemonDetailsTitleColor,
+                    // )
+                    );
               }),
             ],
           ),
@@ -56,11 +65,16 @@ class PokemonTitleInfoWidget extends StatelessWidget {
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 15, vertical: 5),
                                 child: Text(type,
-                                    style: textTheme.bodyText1?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      color: AppTheme.getColors(context)
-                                          .pokemonDetailsTitleColor,
-                                    )),
+                                    style: GoogleFonts.lora(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold)
+                                    // style: textTheme.bodyText1?.copyWith(
+                                    //   fontWeight: FontWeight.bold,
+                                    //   color: AppTheme.getColors(context)
+                                    //       .pokemonDetailsTitleColor,
+                                    // )
+                                    ),
                               ),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(38),
@@ -75,10 +89,15 @@ class PokemonTitleInfoWidget extends StatelessWidget {
               Observer(
                 builder: (_) {
                   return Text("${_pokemonStore.pokemon!.specie} Pokemon",
-                      style: textTheme.bodyText1?.copyWith(
-                        color: AppTheme.getColors(context)
-                            .pokemonDetailsTitleColor,
-                      ));
+                      style: GoogleFonts.lora(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal)
+                      // style: textTheme.bodyText1?.copyWith(
+                      //   color: AppTheme.getColors(context)
+                      //       .pokemonDetailsTitleColor,
+                      // )
+                      );
                 },
               ),
             ],

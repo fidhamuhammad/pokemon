@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app/shared/models/pokemon.dart';
 import 'package:app/shared/ui/canvas/white_pokeball_canvas.dart';
 import 'package:app/theme/app_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class GenerationItemWidget extends StatelessWidget {
   final Generation generation;
@@ -64,7 +65,11 @@ class GenerationItemWidget extends StatelessWidget {
                     children: [
                       Text(
                         generation.description,
-                        style: textTheme.bodyText1,
+                        // style: textTheme.bodyText1,
+                        style: GoogleFonts.lora(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                       ),
                       Row(
                         children: [

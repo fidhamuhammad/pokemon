@@ -26,6 +26,24 @@ dependencies:
   font_awesome_flutter: ^10.5.0
   audio_video_progress_bar: ^2.0.0
   provider: ^6.0.5
+  flutter_bloc: ^8.1.3
+  http: ^1.1.0
+  pinput: ^3.0.1
+
+  intl: ^0.17.0
+
+  mailer: ^6.0.1
+  glassmorphism: ^3.0.0
+  google_fonts: ^6.1.0
+  glass_kit: ^3.0.0
+  glass: ^1.0.2+1
+  fluttertoast: ^8.2.4
+  animated_background: ^2.0.0
+  animated_text_kit: ^4.2.2
+  flutter_advanced_drawer: ^1.3.5
+  image_picker: ^1.0.4
+ 
+
 
 dev_dependencies:
   mockito:
@@ -34,6 +52,13 @@ dev_dependencies:
     sdk: flutter
   integration_test:
     sdk: flutter  
+  flutter_launcher_icons: "^0.13.1"
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/icons/app_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21  
 
   flutter_lints: ^2.0.0
 flutter:
@@ -55,3 +80,17 @@ flutter:
     - assets/images/pokemons_generations/generation_8/
     - assets/lotties/
     - assets/images/pokemons_types/20/water.png
+    - assets/images/R.jpg
+    - assets/images/poke.jpg
+    - assets/images/sliver.jpg
+    - assets/images/poke.png 
+    - assets/images/pokebg.png  
+    - assets/images/pokedexbg05.png 
+    - assets/images/pokedexbg06.png 
+    - assets/images/bgblue0.png         
+    - assets/images/pokeforest02.png
+    - assets/images/bgblue01.png   
+    - assets/images/pokeavatar.png 
+    - assets/images/pokesignbg.png
+    - assets/news.json
+

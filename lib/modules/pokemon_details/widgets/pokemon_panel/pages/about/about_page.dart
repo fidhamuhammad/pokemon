@@ -10,6 +10,7 @@ import 'package:app/modules/pokemon_details/widgets/pokemon_panel/pages/about/wi
 import 'package:app/modules/pokemon_details/widgets/pokemon_panel/pages/about/widget/sound_player.dart';
 import 'package:app/modules/pokemon_details/widgets/pokemon_panel/pages/about/widget/training_info.dart';
 import 'package:app/shared/stores/pokemon_store/pokemon_store.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../pokemon_mobile_panel.dart';
 
@@ -73,7 +74,11 @@ class _AboutPageState extends State<AboutPage> {
                             padding: const EdgeInsets.symmetric(vertical: 4),
                             child: Text(
                               it,
-                              style: textTheme.bodyText1,
+                              // style: textTheme.bodyText1,
+                              style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                             ),
                           ))
                       .toList(),

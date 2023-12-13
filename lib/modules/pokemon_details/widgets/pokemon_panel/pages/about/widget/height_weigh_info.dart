@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:app/shared/stores/pokemon_store/pokemon_store.dart';
 import 'package:app/theme/app_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HeightWeightInfoWidget extends StatelessWidget {
   static final _pokemonStore = GetIt.instance<PokemonStore>();
@@ -42,7 +43,11 @@ class HeightWeightInfoWidget extends StatelessWidget {
                 opacity: 0.4,
                 child: Text(
                   "Height",
-                  style: textTheme.bodyText1,
+                  // style: textTheme.bodyText1,
+                  style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                 ),
               ),
               SizedBox(
@@ -64,7 +69,11 @@ class HeightWeightInfoWidget extends StatelessWidget {
                 opacity: 0.4,
                 child: Text(
                   "Weight",
-                  style: textTheme.bodyText1,
+                  // style: textTheme.bodyText1,
+                  style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                 ),
               ),
               SizedBox(
@@ -73,7 +82,11 @@ class HeightWeightInfoWidget extends StatelessWidget {
               Observer(
                 builder: (_) => Text(
                   _pokemonStore.pokemon!.weight,
-                  style: textTheme.bodyText1,
+                  // style: textTheme.bodyText1,
+                  style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                 ),
               )
             ],

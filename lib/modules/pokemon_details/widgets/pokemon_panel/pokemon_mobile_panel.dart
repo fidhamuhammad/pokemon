@@ -9,6 +9,7 @@ import 'package:app/modules/pokemon_details/widgets/pokemon_panel/pages/evolutio
 import 'package:app/modules/pokemon_details/widgets/pokemon_panel/pages/moves/moves_page.dart';
 import 'package:app/shared/ui/enums/device_screen_type.dart';
 import 'package:app/theme/app_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 double getDetailsPanelsPadding(Size size) {
@@ -114,6 +115,7 @@ class _PokemonMobilePanelWidgetState extends State<PokemonMobilePanelWidget>
       parallaxOffset: 0.5,
       controller: _panelController,
       color: Theme.of(context).backgroundColor,
+      // color: Colors.black12,
       panelBuilder: (scrollController) {
         return Padding(
           padding: const EdgeInsets.only(top: 10),
@@ -123,7 +125,8 @@ class _PokemonMobilePanelWidgetState extends State<PokemonMobilePanelWidget>
                 topLeft: Radius.circular(30),
                 topRight: Radius.circular(30),
               ),
-              color: Theme.of(context).backgroundColor,
+              color: Theme.of(context).backgroundColor.withOpacity(0.4)
+              // color: Colors.amber
             ),
             child: NestedScrollView(
               controller: scrollController,
@@ -140,6 +143,7 @@ class _PokemonMobilePanelWidgetState extends State<PokemonMobilePanelWidget>
                         Container(
                           decoration: BoxDecoration(
                             color: Theme.of(context).backgroundColor,
+                            // color: Colors.black12,
                             borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(30),
                               topRight: Radius.circular(30),
@@ -157,35 +161,54 @@ class _PokemonMobilePanelWidgetState extends State<PokemonMobilePanelWidget>
                               color: null,
                             ),
                             indicatorColor:
-                                AppTheme.getColors(context).tabIndicator,
+                                // AppTheme.getColors(context).tabIndicator,
+                                Colors.black12,
                             controller: _tabController,
                             tabs: [
                               Tab(
                                 child: FittedBox(
                                   fit: BoxFit.fitWidth,
-                                  child:
-                                      Text("About", style: textTheme.bodyText1),
+                                  child: Text(
+                                    "About",
+                                    // style: textTheme.bodyText1
+                                    style: GoogleFonts.lora(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal),
+                                  ),
                                 ),
                               ),
                               Tab(
                                 child: FittedBox(
                                   fit: BoxFit.fitWidth,
                                   child: Text("Base Stats",
-                                      style: textTheme.bodyText1),
+                                      // style: textTheme.bodyText1
+                                       style: GoogleFonts.lora(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal),
+                                      ),
                                 ),
                               ),
                               Tab(
                                 child: FittedBox(
                                   fit: BoxFit.fitWidth,
                                   child: Text("Evolution",
-                                      style: textTheme.bodyText1),
+                                      // style: textTheme.bodyText1,
+                                       style: GoogleFonts.lora(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal),
+                                      ),
                                 ),
                               ),
                               Tab(
                                 child: FittedBox(
                                   fit: BoxFit.fitWidth,
                                   child:
-                                      Text("Moves", style: textTheme.bodyText1),
+                                      Text("Moves", 
+                                      // style: textTheme.bodyText1
+                                       style: GoogleFonts.lora(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.normal),
+                                      ),
                                 ),
                               ),
                             ],
@@ -197,10 +220,13 @@ class _PokemonMobilePanelWidgetState extends State<PokemonMobilePanelWidget>
                 ];
               },
               body: Padding(
+                
                 padding: EdgeInsets.only(top: 20),
                 child: TabBarView(
+                  
                   controller: _tabController,
                   children: [
+                    
                     NotificationListener<UserScrollNotification>(
                       child: SingleChildScrollView(
                         controller: setScrollControllerByPlatform(

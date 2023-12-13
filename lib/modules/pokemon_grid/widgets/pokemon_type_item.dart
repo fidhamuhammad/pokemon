@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app/shared/ui/canvas/white_pokeball_canvas.dart';
 import 'package:app/shared/utils/app_constants.dart';
 import 'package:app/theme/app_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PokemonTypeItemWidget extends StatelessWidget {
   final String type;
@@ -84,6 +85,10 @@ class PokemonTypeItemWidget extends StatelessWidget {
                       Text(
                         type,
                         style: textTheme.bodyText1,
+                        //  style: GoogleFonts.lora(
+                        //   color: Colors.white,
+                        //   fontSize: 10,
+                        //   fontWeight: FontWeight.normal),
                       ),
                       Image.asset(
                         AppConstants.pokemonTypeLogo(type, size: 60),

@@ -6,6 +6,7 @@ import 'package:app/shared/ui/widgets/image_dialog.dart';
 import 'package:app/shared/utils/hero_dialog_route.dart';
 import 'package:app/shared/utils/image_utils.dart';
 import 'package:app/theme/app_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../pokemon_mobile_panel.dart';
 
@@ -72,8 +73,12 @@ class _PokemonCardsWidgetState extends State<PokemonCardsWidget> {
                   padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
                   child: Text(
                     "${_pokemonStore.pokemon!.name} Cards",
-                    style: textTheme.bodyText1
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                    // style: textTheme.bodyText1
+                    //     ?.copyWith(fontWeight: FontWeight.bold),
+                    style: GoogleFonts.lora(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -138,13 +143,21 @@ class _PokemonCardsWidgetState extends State<PokemonCardsWidget> {
                               ),
                               Text(
                                 "${card.number} - ${card.name}",
-                                style: textTheme.bodyText1,
+                                // style: textTheme.bodyText1,
+                                style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                               ),
                               FittedBox(
                                 fit: BoxFit.scaleDown,
                                 child: Text(
                                   "${card.expansionName}",
-                                  style: textTheme.bodyText1,
+                                  // style: textTheme.bodyText1,
+                                  style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                                 ),
                               ),
                             ],

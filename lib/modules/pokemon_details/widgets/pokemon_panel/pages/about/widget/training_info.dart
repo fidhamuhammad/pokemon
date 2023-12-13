@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:app/shared/stores/pokemon_store/pokemon_store.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TrainingInfoWidget extends StatelessWidget {
   static final _pokemonStore = GetIt.instance<PokemonStore>();
@@ -23,8 +24,12 @@ class TrainingInfoWidget extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 9),
               child: Text(
                 "Training",
-                style:
-                    textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+                // style:
+                //     textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+                style: GoogleFonts.lora(
+                                        color: Colors.black,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
               ),
             ),
             SingleChildScrollView(
@@ -45,14 +50,22 @@ class TrainingInfoWidget extends StatelessWidget {
                                 opacity: 0.4,
                                 child: Text(
                                   "EV yield",
-                                  style: textTheme.bodyText1,
+                                  // style: textTheme.bodyText1,
+                                  style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                                 ),
                               ),
                             ),
                             Observer(
                               builder: (_) => Text(
                                 "${_pokemonStore.pokemon!.training.evYield}",
-                                style: textTheme.bodyText1,
+                                // style: textTheme.bodyText1,
+                                style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                               ),
                             ),
                           ],
@@ -68,14 +81,22 @@ class TrainingInfoWidget extends StatelessWidget {
                                 opacity: 0.4,
                                 child: Text(
                                   "Catch rate",
-                                  style: textTheme.bodyText1,
+                                  // style: textTheme.bodyText1,
+                                  style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                                 ),
                               ),
                             ),
                             Observer(
                               builder: (_) => Text(
                                 "${_pokemonStore.pokemon!.training.catchRate}",
-                                style: textTheme.bodyText1,
+                                // style: textTheme.bodyText1,
+                                style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                               ),
                             ),
                           ],
@@ -91,14 +112,22 @@ class TrainingInfoWidget extends StatelessWidget {
                                 opacity: 0.4,
                                 child: Text(
                                   "Base Friendship",
-                                  style: textTheme.bodyText1,
+                                  // style: textTheme.bodyText1,
+                                  style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                                 ),
                               ),
                             ),
                             Observer(
                               builder: (_) => Text(
                                 "${_pokemonStore.pokemon!.training.baseFriendship}",
-                                style: textTheme.bodyText1,
+                                // style: textTheme.bodyText1,
+                                style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                               ),
                             ),
                           ],
@@ -114,14 +143,22 @@ class TrainingInfoWidget extends StatelessWidget {
                                 opacity: 0.4,
                                 child: Text(
                                   "Base Exp.",
-                                  style: textTheme.bodyText1,
+                                  // style: textTheme.bodyText1,
+                                  style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                                 ),
                               ),
                             ),
                             Observer(
                               builder: (_) => Text(
                                 "${_pokemonStore.pokemon!.training.baseExp}",
-                                style: textTheme.bodyText1,
+                                // style: textTheme.bodyText1,
+                                style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                               ),
                             ),
                           ],
@@ -137,14 +174,22 @@ class TrainingInfoWidget extends StatelessWidget {
                                 opacity: 0.4,
                                 child: Text(
                                   "Growth Rate",
-                                  style: textTheme.bodyText1,
+                                  // style: textTheme.bodyText1,
+                                  style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                                 ),
                               ),
                             ),
                             Observer(
                               builder: (_) => Text(
                                 "${_pokemonStore.pokemon!.training.growthRate}",
-                                style: textTheme.bodyText1,
+                                // style: textTheme.bodyText1,
+                                style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                               ),
                             ),
                           ],

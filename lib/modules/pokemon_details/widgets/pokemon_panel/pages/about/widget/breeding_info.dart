@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:app/shared/models/pokemon.dart';
 import 'package:app/shared/stores/pokemon_store/pokemon_store.dart';
 import 'package:app/theme/app_theme.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class BreedingInfoWidget extends StatelessWidget {
   static final _pokemonStore = GetIt.instance<PokemonStore>();
@@ -24,11 +25,13 @@ class BreedingInfoWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 9),
-              child: Text(
-                "Breeding",
-                style:
-                    textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
-              ),
+              child: Text("Breeding",
+                  // style:
+                  //     textTheme.bodyText1?.copyWith(fontWeight: FontWeight.bold),
+                  style: GoogleFonts.lora(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
             ),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -49,7 +52,11 @@ class BreedingInfoWidget extends StatelessWidget {
                                   opacity: 0.4,
                                   child: Text(
                                     "Gender",
-                                    style: textTheme.bodyText1,
+                                    // style: textTheme.bodyText1,
+                                    style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                                   ),
                                 ),
                               ),
@@ -85,17 +92,21 @@ class BreedingInfoWidget extends StatelessWidget {
                                         Padding(
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 5),
-                                          child: Text(
-                                            "???",
-                                            style: textTheme.bodyText1,
-                                          ),
+                                          child: Text("???",
+                                              // style: textTheme.bodyText1,
+                                              style: GoogleFonts.lora(
+                                                  color: Colors.grey[900],
+                                                  fontWeight:
+                                                      FontWeight.normal)),
                                         ),
                                       Text(
-                                        gender.type == GenderType.UNKNOWN
-                                            ? "--%"
-                                            : "${gender.percentage}",
-                                        style: textTheme.bodyText1,
-                                      ),
+                                          gender.type == GenderType.UNKNOWN
+                                              ? "--%"
+                                              : "${gender.percentage}",
+                                          // style: textTheme.bodyText1,
+                                          style: GoogleFonts.lora(
+                                              color: Colors.grey[900],
+                                              fontWeight: FontWeight.normal)),
                                     ],
                                   ),
                                 );
@@ -113,13 +124,22 @@ class BreedingInfoWidget extends StatelessWidget {
                               child: Opacity(
                                 opacity: 0.4,
                                 child: Text("Egg Groups",
-                                    style: textTheme.bodyText1),
+                                    // style: textTheme.bodyText1,
+                                    style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
+                                    ),
                               ),
                             ),
                             Observer(
                               builder: (_) => Text(
                                 "${_pokemonStore.pokemon!.breeding.egg!.groups.join(", ")}",
-                                style: textTheme.bodyText1,
+                                // style: textTheme.bodyText1,
+                                style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                               ),
                             ),
                           ],
@@ -135,14 +155,22 @@ class BreedingInfoWidget extends StatelessWidget {
                                 opacity: 0.4,
                                 child: Text(
                                   "Egg Cycle",
-                                  style: textTheme.bodyText1,
+                                  // style: textTheme.bodyText1,
+                                  style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                                 ),
                               ),
                             ),
                             Observer(
                               builder: (_) => Text(
                                 "${_pokemonStore.pokemon!.breeding.egg!.cycle}",
-                                style: textTheme.bodyText1,
+                                // style: textTheme.bodyText1,
+                                style: GoogleFonts.lora(
+                                        color: Colors.grey[900],
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal),
                               ),
                             ),
                           ],
