@@ -1,6 +1,8 @@
 import 'dart:ui';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
+import 'package:app/modules/Pokedexgroup/group.dart';
 import 'package:app/modules/home/bloc/news_bloc.dart';
 import 'package:app/modules/home/home_page_store.dart';
 import 'package:app/modules/home/widgets/pokedex_grid.dart';
@@ -10,13 +12,20 @@ import 'package:app/modules/pokemon_details/pokemon_details.dart';
 import 'package:app/modules/pokemon_details/widgets/pokemon_panel/pages/about/about_page.dart';
 import 'package:app/modules/pokemon_grid/pokemon_grid_page.dart';
 import 'package:app/modules/profile/user_profile_screen.dart';
+import 'package:app/provider/login_provider.dart';
 import 'package:app/shared/stores/item_store/item_store.dart';
 import 'package:app/shared/stores/pokemon_store/pokemon_store.dart';
 import 'package:app/shared/ui/widgets/app_bar.dart';
 import 'package:app/shared/ui/widgets/drawer_menu/drawer_menu.dart';
+import 'package:app/shared/ui/widgets/gradient/circuar_gradient.dart';
 import 'package:app/shared/ui/widgets/drawer_menu/widgets/drawer_menu_item.dart';
 import 'package:app/shared/ui/widgets/pokeball.dart';
+import 'package:app/shared/ui/widgets/search/search.dart';
+import 'package:app/shared/ui/widgets/animations/rive/bottom_appbar.dart';
+import 'package:app/shared/ui/widgets/sliver_appbar/pokegrid_sliver.dart';
 import 'package:app/shared/ui/widgets/sliver_appbar/sliver_appbar.dart';
+import 'package:app/shared/ui/widgets/sliver_appbar/sliver_box.dart';
+import 'package:app/shared/ui/widgets/sliver_appbar/sliver_padding.dart';
 import 'package:app/shared/utils/app_constants.dart';
 import 'package:app/shared/utils/spacer.dart';
 import 'package:app/theme/app_theme.dart';
@@ -24,14 +33,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:glass_kit/glass_kit.dart';
+import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
+
+
 
 class HomePage extends StatefulWidget {
   bool isLoggedIn;
   HomePage({Key? key, this.isLoggedIn = false}) : super(key: key);
+  
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -129,12 +144,34 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   @override
+
   Widget build(BuildContext context) {
+  final authStatusProvider = Provider.of<AuthStatusProvider>(context);
+
+    // Widget _tabBody = Container(color: Colors.cyan,);
+    // final List<Widget> _screens = [
+    //   commonTabScene('User'),
+    //   commonTabScene('Audio'),
+    //   commonTabScene('Settings'),
+    //   commonTabScene('Bell'),
+    // ];
+
+    // @override
+    // void initState() {
+    //   _tabBody = _screens.first;
+    //   super.initState();
+      
+    // }
+
+
+    final _deviceHeight = MediaQuery.of(context).size.height;
+    final _deviceWidth = MediaQuery.of(context).size.width;
     final TextTheme textTheme = Theme.of(context).textTheme;
     return ThemeSwitchingArea(
       child: Builder(builder: (context) {
         return Scaffold(
-          // backgroundColor: Colors.red,
+          // backgroundColor: Color.fromARGB(255, 12, 25, 110),
+          // backgroundColor: Colors.white,
 
           key: const Key('home_page'),
 
@@ -142,183 +179,55 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: DrawerMenuWidget(
               isLoggedIn: false,
               userName: userName,
+              onLogout: () async {
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                prefs.remove('userName');
+                setState(() {
+                  widget.isLoggedIn = false;
+                });
+                Navigator.pop(context);
+              },
             ),
           ),
+          extendBody: true,
           body: Stack(
             children: [
-              // Background Image or Color
-              Container(
-                // Set your background image or color here
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                        'assets/images/pokebg.png'), // Replace with your background image
-                    fit: BoxFit.cover,
-                  ),
+              Container (
+                 decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Color.fromARGB(255, 233, 240, 248),
+            Color.fromARGB(255, 250, 248, 247),
+          ],
+          begin: Alignment.bottomRight,
+          end: Alignment.bottomLeft,
+        ),),
+                child: CustomScrollView(
+                  slivers: [
+                    CustomSliverAppbar(),
+                    SliverSearch(),
+                    PokegridSliver(),
+                    CustomeSliverPadding(),
+                    CustomNavigationBar(
+                      // onTabChange: (tabIndex) {
+                        
+                      // },
+                    ),
+                  ],
+                  
                 ),
-              ),
-              // Frosted Glass Overlay
-              BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                child: Container(
-                  color: Colors.black
-                      .withOpacity(0.5), // Adjust the opacity as needed
-                  // Add any additional styling or child widgets here
-                ),
-              ),
-
-              CustomScrollView(
-                slivers: [
-                  CustomSliverAppbar(),
-                  SliverPadding(
-                    padding: EdgeInsets.fromLTRB(2, 4, 2, 3),
-                    sliver: SliverGrid.count(
-                      crossAxisCount: 3,
-                      childAspectRatio: 2.1,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => PokemonGridPage()));
-                          },
-                          child: PokeDexGrid(
-                            gridText: 'Pokedex',
-                            gridColor: Color(0xFF48D0B0),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => UserProfileScreen()));
-                          },
-                          child: PokeDexGrid(
-                            gridText: 'Items',
-                            gridColor: Color(0xFFFB6C6C),
-                          ),
-                        ),
-                        PokeDexGrid(
-                          gridText: 'Moves',
-                          gridColor: Color(0xFF7AC7FF),
-                        ),
-                        PokeDexGrid(
-                          gridText: 'Abilities',
-                          gridColor: Color(0xFFA7A877),
-                          // gridColor: Color(0xFFFFCE4B),
-                        ),
-                        PokeDexGrid(
-                            gridText: 'Locations', gridColor: Color(0xFFA8B91F)
-                            //  Color(0xD0795548),
-                            ),
-                        PokeDexGrid(
-                          gridText: 'Berries',
-                          gridColor: Color(0xFF9F5BBA),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SliverPadding(
-                    padding: EdgeInsets.fromLTRB(3, 8, 4, 3),
-                    sliver: SliverToBoxAdapter(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text('Pokemon News',
-                                style: GoogleFonts.lora(
-                                    textStyle: TextStyle(
-                                        color: Colors.white,
-                                        letterSpacing: 0.5,
-                                        fontSize: 28,
-                                        fontWeight: FontWeight.bold))),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => NewsListPage(),
-                                    ));
-                              },
-                              child: Text('View All',
-                                  style: GoogleFonts.lora(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal)
-                                  // style: TextStyle(
-                                  //     color: Color.fromARGB(255, 188, 220, 246),
-                                  //     fontWeight: FontWeight.bold,
-                                  //     fontFamily: GoogleFonts.montserrat().fontFamily
-                                  //     ),
-                                  ),
-                            ),
-                          ]),
-                    ),
-                  ),
-                  BlocProvider(
-                    create: (context) => _newsBloc..add(LoadNewsEvent()),
-                    child: BlocBuilder<NewsBloc, NewsState>(
-                      builder: (context, state) {
-                        if (state is NewsLoadedSuccessfully) {
-                          print('${state.newsList[1]}999999999999999999999999');
-                          return SliverList.separated(
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                margin: EdgeInsets.fromLTRB(8, 1, 8, 1),
-                                decoration: BoxDecoration(
-                                  color: Color.fromARGB(255, 85, 85, 82)
-                                      .withOpacity(0.3),
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: ListTile(
-                                  contentPadding: EdgeInsets.all(10),
-                                  title: Text(
-                                    state.newsList[index]['title'],
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  subtitle: Container(
-                                    alignment: Alignment.bottomLeft,
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(100))),
-                                    child: Text(
-                                      state.newsList[index]['date'],
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ),
-                                  leading: CircleAvatar(
-                                    radius: 40,
-                                    backgroundImage: NetworkImage(
-                                      state.newsList[index]['pic'],
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                            separatorBuilder: (context, index) => Divider(),
-                            itemCount: state.newsList
-                                .length, // Replace with your actual item count
-                          );
-                        } else {
-                          return SliverFillRemaining(
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ),
-                ],
               ),
             ],
           ),
         );
       }),
+    );
+  }
+
+  Widget commonTabScene(String tabName){
+    return Container(
+      alignment: Alignment.center,
+      child: Text(tabName, style: const TextStyle(fontSize: 28),),
     );
   }
 
@@ -332,7 +241,249 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       });
     }
   }
+
+  @override
+  void dispose() {
+    _backgroundAnimationController.dispose();
+    _fabAnimationRotationController.dispose();
+    _fabAnimationOpenController.dispose();
+    super.dispose();
+  }
 }
+
+
+
+
+
+
+
+      // above code till to here only
+
+
+
+ // Align(
+              //   alignment: AlignmentDirectional(3, -3.0),
+              //   child: Container(
+              //     height: 300,
+              //     width: 300,
+              //     decoration: BoxDecoration(
+              //       shape: BoxShape.circle,
+              //       color: Colors.deepPurple
+              //     ),
+              //   ),
+              // ),
+              // CircularGradientContainer(
+              //     right: 320,
+              //     top: 50,
+              //     size: 20,
+              //     gradientColors: [
+              //       Color(0xff744ff9),
+              //       Color(0xff8369de),
+              //       Color(0xff8da0cb)
+              //     ]),
+              // CircularGradientContainer(
+              //     left: 320,
+              //     bottom: 15,
+              //     size: 50,
+              //     gradientColors: [
+              //       Color(0xff744ff9),
+              //       Color(0xff8369de),
+              //       Color(0xff8da0cb)
+              //     ]),
+              // CircularGradientContainer(
+              //   top: 20,
+              //   left: 20,
+              //   size: 50, gradientColors: [
+              //   Color(0xff744ff9),
+              //   Color(0xff8369de),
+              //   Color(0xff8da0cb)
+              // ]),
+
+              // BackdropFilter(
+              //   filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+              //   child: Container(
+              //     color: Colors.black
+              //         .withOpacity(0.08), // Adjust the opacity as needed
+              //     height: double.infinity,
+              //     width: double.infinity,
+              //   ),
+              // ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//   Widget _searchBox() {
+//   // final state = Provider.of<PokemonState>(context);
+//   // return SliverToBoxAdapter(
+//   //   child: InkWell(
+//   //     onTap: () async {
+//   //       await showSearch(
+//   //         context: context,
+//   //         delegate: PokemonSearch(state.pokemonList),
+//   //       );
+//   //     },
+//       // child: 
+//       Container(
+//         height: 40,
+//         padding: EdgeInsets.symmetric(horizontal: 15),
+//         margin: EdgeInsets.only(right: 30, top: 30, bottom: 20),
+//         decoration: BoxDecoration(
+//           color: Color(0xfff6f6f6),
+//           borderRadius: BorderRadius.circular(50),
+//         ),
+//         child: Row(
+//           children: <Widget>[
+//             Icon(Icons.search, color: Colors.grey.shade600),
+//             SizedBox(width: 10),
+//             Text(
+//               'Search Pokemon, Move, Ability',
+//               style: TextStyle(
+//                 color: Colors.grey.shade600,
+//                 // fontSize: getFontSize(context, 14),
+//               ),
+//             )
+//           ],
+//         ),
+//       );
+// }
+
+
+
+//  // Background Image or Color
+//               Container(
+//                 // Set your background image or color here
+//                 decoration: BoxDecoration(
+//                   image: DecorationImage(
+//                     image: AssetImage(
+//                         'assets/images/pokebg.png'), // Replace with your background image
+//                     fit: BoxFit.cover,
+//                   ),
+//                   // color: Color.fromARGB(255, 202, 198, 198)
+//                 ),
+//               ),
+
+//  // Frosted Glass Overlay
+//               BackdropFilter(
+//                 filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+//                 child: Container(
+//                   color: Colors.black
+//                       .withOpacity(0.5), // Adjust the opacity as needed
+//                   // Add any additional styling or child widgets here
+//                 ),
+//               ),
+
+
+
+
+
+// SliverPadding(
+                  //   padding: EdgeInsets.fromLTRB(3, 8, 4, 3),
+                  //   sliver: SliverToBoxAdapter(
+                  //     child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //         children: [
+                  //           Text('Pokemon News',
+                  //               style: GoogleFonts.lora(
+                  //                   textStyle: TextStyle(
+                  //                       color: Colors.white,
+                  //                       letterSpacing: 0.5,
+                  //                       fontSize: 28,
+                  //                       fontWeight: FontWeight.bold))),
+                  //           TextButton(
+                  //             onPressed: () {
+                  //               Navigator.push(
+                  //                   context,
+                  //                   MaterialPageRoute(
+                  //                     builder: (context) => NewsListScreen(),
+                  //                   ));
+                  //             },
+                  //             child: Text('View All',
+                  //                 style: GoogleFonts.lora(
+                  //                     color: Colors.white,
+                  //                     fontSize: 15,
+                  //                     fontWeight: FontWeight.normal)
+                  //                 // style: TextStyle(
+                  //                 //     color: Color.fromARGB(255, 188, 220, 246),
+                  //                 //     fontWeight: FontWeight.bold,
+                  //                 //     fontFamily: GoogleFonts.montserrat().fontFamily
+                  //                 //     ),
+                  //                 ),
+                  //           ),
+                  //         ]),
+                  //   ),
+                  // ),
+                  // BlocProvider(
+                  //   create: (context) => _newsBloc..add(LoadNewsEvent()),
+                  //   child: BlocBuilder<NewsBloc, NewsState>(
+                  //     builder: (context, state) {
+                  //       if (state is NewsLoadedSuccessfully) {
+                  //         print('${state.newsList[1]}999999999999999999999999');
+                  //         return SliverList.separated(
+                  //           itemBuilder: (BuildContext context, int index) {
+                  //             return Container(
+                  //               margin: EdgeInsets.fromLTRB(8, 1, 8, 1),
+                  //               decoration: BoxDecoration(
+                  //                 color: Color.fromARGB(255, 85, 85, 82)
+                  //                     .withOpacity(0.3),
+                  //                 borderRadius: BorderRadius.circular(20.0),
+                  //               ),
+                  //               child: ListTile(
+                  //                 contentPadding: EdgeInsets.all(10),
+                  //                 title: Text(
+                  //                   state.newsList[index]['title'],
+                  //                   style: TextStyle(
+                  //                     fontWeight: FontWeight.bold,
+                  //                     color: Colors.white,
+                  //                   ),
+                  //                 ),
+                  //                 subtitle: Container(
+                  //                   alignment: Alignment.bottomLeft,
+                  //                   decoration: BoxDecoration(
+                  //                       borderRadius: BorderRadius.all(
+                  //                           Radius.circular(100))),
+                  //                   child: Text(
+                  //                     state.newsList[index]['date'],
+                  //                     style: TextStyle(color: Colors.white),
+                  //                   ),
+                  //                 ),
+                  //                 leading: CircleAvatar(
+                  //                   radius: 40,
+                  //                   backgroundImage: NetworkImage(
+                  //                     state.newsList[index]['pic'],
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             );
+                  //           },
+                  //           separatorBuilder: (context, index) => SizedBox(),
+                  //           itemCount: state.newsList
+                  //               .length, // Replace with your actual item count
+                  //         );
+                  //       } else {
+                  //         return SliverFillRemaining(
+                  //           child: Center(
+                  //             child: CircularProgressIndicator(),
+                  //           ),
+                  //         );
+                  //       }
+                  //     },
+                  //   ),
+                  // ),
 
 
 

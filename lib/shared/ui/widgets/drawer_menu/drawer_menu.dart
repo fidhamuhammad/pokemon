@@ -1,5 +1,7 @@
-import 'package:app/modules/authentication/signup/signup.dart';
+import 'package:app/modules/authentication/login/login.dart';
 import 'package:app/modules/home/home_page.dart';
+import 'package:app/modules/profile/user_profile_screen.dart';
+import 'package:app/provider/login_provider.dart';
 import 'package:app/shared/ui/widgets/animated_pokeball.dart';
 import 'package:app/shared/ui/widgets/textButton.dart';
 import 'package:app/shared/utils/app_constants.dart';
@@ -8,13 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class DrawerMenuWidget extends StatefulWidget {
-  final bool isLoggedIn;
+  bool isLoggedIn;
   final String? userName;
+  final Function()? onLogout;
+
   DrawerMenuWidget({
     this.userName = '',
     required this.isLoggedIn,
+    required this.onLogout,
   });
 
   @override
@@ -55,16 +61,16 @@ class _DrawerMenuWidgetState extends State<DrawerMenuWidget>
         begin: Alignment.bottomRight,
         end: Alignment.topCenter,
         colors: [
-          Color.fromARGB(255, 75, 141, 172).withOpacity(0.5),
-          Color.fromARGB(255, 127, 210, 214).withOpacity(0.1),
+          Color.fromARGB(255, 12, 41, 254).withOpacity(0.5),
+          Color.fromARGB(255, 141, 167, 244).withOpacity(0.1),
         ],
       ),
       borderGradient: LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
-          Color.fromARGB(255, 32, 105, 147).withOpacity(0.5),
-          Color.fromARGB(255, 40, 99, 135).withOpacity(0.3),
+          Color.fromARGB(255, 119, 153, 255).withOpacity(0.5),
+          Color.fromARGB(255, 110, 130, 245).withOpacity(0.3),
         ],
       ),
       child: Container(
@@ -73,7 +79,7 @@ class _DrawerMenuWidgetState extends State<DrawerMenuWidget>
             //   image: AssetImage('assets/images/froasted_blur.jpg'),
             //   fit: BoxFit.cover,
             // ),
-            color: const Color.fromARGB(255, 9, 91, 158).withOpacity(0.4)),
+            color: Color.fromARGB(255, 145, 162, 198).withOpacity(0.4)),
         child: Stack(
           children: [
             Column(
@@ -99,7 +105,7 @@ class _DrawerMenuWidgetState extends State<DrawerMenuWidget>
                             widget.userName != null ? widget.userName! : 'user',
                         style: GoogleFonts.lora(
                             color: Colors.white,
-                            fontSize: 15,
+                            fontSize: 18,
                             fontWeight: FontWeight.normal),
                       )
                     ],
@@ -121,8 +127,144 @@ class _DrawerMenuWidgetState extends State<DrawerMenuWidget>
                             fontWeight: FontWeight.bold)),
                   ],
                 ),
-                hSpace(30),
-                // Add the rest of your widgets as needed
+                hSpace(30),          
+                    // widget.isLoggedIn == false
+                    // ? Column(
+                    //     children: [
+                    //       ListTile(
+                    //         title: Align(
+                    //           alignment: Alignment.center,
+                    //           child: TextButton(
+                    //             onPressed: () {
+                    //           Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(),)); // Close the drawer
+                    //              if (widget.onLogout != null) {
+                    //                 widget.onLogout!();
+                    //               }  
+                    //             }, 
+                    //           child: Text(
+                    //             'Logout',
+                    //             style: GoogleFonts.lora(
+                    //               textStyle: TextStyle(
+                    //                 color: Colors.black,
+                    //                 fontWeight: FontWeight.bold,
+                    //                 fontSize: 20,
+                    //               ),
+                    //             ),
+                    //           ),
+                    //           )
+                    //         ),                         
+                    //       ),
+                    //     ],
+                    //   )
+                    // : ListTile(
+                    //     title: GestureDetector(
+                    //       onTap: () {
+                    //         Navigator.push(
+                    //           context,
+                    //           MaterialPageRoute(
+                    //             builder: (context) => SignUpScreen(),
+                    //           ),
+                    //         );
+                    //       },
+                    //       child: Align(
+                    //         alignment: Alignment.center,
+                    //         child: RichText(
+                    //           text: TextSpan(
+                    //             text: 'New to pokedex? ',
+                    //             style: GoogleFonts.lora(
+                    //               textStyle: TextStyle(
+                    //                 color: Colors.black,
+                    //                 fontWeight: FontWeight.bold,
+                    //                 fontSize: 15,
+                    //               ),
+                    //             ),
+                    //             children: [
+                    //               TextSpan(
+                    //                 text: 'Sign Up',
+                    //                 style: GoogleFonts.lora(
+                    //                   textStyle: TextStyle(
+                    //                     color: Colors.white,
+                    //                     fontWeight: FontWeight.bold,
+                    //                     fontSize: 15,
+                    //                   ),
+                    //                 ),
+                    //               ),
+                    //             ],
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    Consumer<AuthStatusProvider>(builder:
+                     (context, value, child) {
+                       if (value.isLoggedIn) {
+                         return Text('logout');
+                       }
+                       else{
+                        return  ListTile(
+                        title: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>  LoginScreen(),
+                              ),
+                            );
+                          },
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'New to pokedex? ',
+                                style: GoogleFonts.lora(
+                                  textStyle: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: 'Login',
+                                    style: GoogleFonts.lora(
+                                      textStyle: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                       }
+                     },
+                     )
+              ],
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: Lottie.asset(
+                AppConstants.diglettLottie,
+                height: 200.0,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
+
+
+ // Add the rest of your widgets as needed
                 // widget.userName == ''
                 //     ? Padding(
                 //         padding: const EdgeInsets.only(top: 12.0),
@@ -218,89 +360,90 @@ class _DrawerMenuWidgetState extends State<DrawerMenuWidget>
                 //             ),
                 //       ),
 
-                widget.isLoggedIn == false
-                    ? 
-                    ListTile(
-                        title: GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SignUpScreen(),
-                              ),
-                            );
-                          },
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: RichText(
-                              text:
-                               TextSpan(
-                                text: 'New to pokedex? ',
-                                style:  GoogleFonts.lora(
-                                  textStyle: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                      ),
-                                ),
-                                children: [
-                                  TextSpan(
-                                    text: 'Sign Up',
-                                    style: GoogleFonts.lora(
-                                      textStyle: TextStyle(
-                                        color:  Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                      ),
-                                    ),
+              //  !widget.isLoggedIn
+              //       ? 
+              //       ListTile(
+              //           title: GestureDetector(
+              //             onTap: () {
+              //               Navigator.push(
+              //                 context,
+              //                 MaterialPageRoute(
+              //                   builder: (context) => SignUpScreen(),
+              //                 ),
+              //               );
+              //             },
+              //             child: Align(
+              //               alignment: Alignment.center,
+              //               child: RichText(
+              //                 text:
+              //                  TextSpan(
+              //                   text: 'New to pokedex? ',
+              //                   style:  GoogleFonts.lora(
+              //                     textStyle: TextStyle(
+              //                           color: Colors.black,
+              //                           fontWeight: FontWeight.bold,
+              //                           fontSize: 15,
+              //                         ),
+              //                   ),
+              //                   children: [
+              //                     TextSpan(
+              //                       text: 'Sign Up',
+              //                       style: GoogleFonts.lora(
+              //                         textStyle: TextStyle(
+              //                           color:  Colors.white,
+              //                           fontWeight: FontWeight.bold,
+              //                           fontSize: 15,
+              //                         ),
+              //                       ),
                                     
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-                    : ListTile(
-                        title:
-                         Align(
-                          alignment: Alignment.center,
-                           child: 
-                           Text(
-                            'Logout',
-                            style: GoogleFonts.lora(
-                              textStyle: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            ),
-                         ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
-                        },
-                      ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Lottie.asset(
-                AppConstants.diglettLottie,
-                height: 200.0,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+              //                     ),
+              //                   ],
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //         )
+              //       : ListTile(
+              //           title:
+              //            Align(
+              //             alignment: Alignment.center,
+              //              child: 
+              //              Text(
+              //               'Logout',
+              //               style: GoogleFonts.lora(
+              //                 textStyle: TextStyle(
+              //                   color: Colors.black,
+              //                   fontWeight: FontWeight.bold,
+              //                   fontSize: 20,
+              //                 ),
+              //               ),
+              //               ),
+              //            ),
+              //           onTap: () {
+              //             Navigator.pop(
+              //               context,
+              //               MaterialPageRoute(
+              //                 builder: (context) => 
+              //                  HomePage(),
+              //               ),
+              //             );
+              //           },
+              //         ),
+              // ],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

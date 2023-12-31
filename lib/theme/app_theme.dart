@@ -51,49 +51,123 @@ abstract class AppColors {
     }
   }
 
-//   Color pokemonItem(String type) {
+
+//  Color pokemonItem(String type, {double opacity = 1.0}) {
 //     switch (type) {
 //       case 'Normal':
-//         return Color(0xFFA7A877);
+//         return Color(0xFFA7A877).withOpacity(opacity);
 //       case 'Fire':
-//         return Color(0xFFFB6C6C);
+//         return Color(0xFFFB6C6C).withOpacity(opacity);
 //       case 'Water':
-//         return Color(0xFF77BDFE);
+//         return Color(0xFF77BDFE).withOpacity(opacity);
 //       case 'Grass':
-//         return Color(0xFF48D0B0);
+//         return Color(0xFF48D0B0).withOpacity(opacity);
 //       case 'Electric':
-//         return Color(0xFFFFCE4B);
+//         return Color(0xFFFFCE4B).withOpacity(opacity);
 //       case 'Ice':
-//         return Color(0xFF99D7D8);
+//         return Color(0xFF99D7D8).withOpacity(opacity);
 //       case 'Fighting':
-//         return Color(0xFFC03128);
+//         return Color(0xFFC03128).withOpacity(opacity);
 //       case 'Poison':
-//         return Color(0xFF9F419F);
+//         return Color(0xFF9F419F).withOpacity(opacity);
 //       case 'Ground':
-//         return Color(0xFFE1C068);
+//         return Color(0xFFE1C068).withOpacity(opacity);
 //       case 'Flying':
-//         return Color(0xFFA890F0);
+//         return Color(0xFFA890F0).withOpacity(opacity);
 //       case 'Psychic':
-//         return Color(0xFFF95887);
+//         return Color(0xFFF95887).withOpacity(opacity);
 //       case 'Bug':
-//         return Color(0xFFA8B91F);
+//         return Color(0xFFA8B91F).withOpacity(opacity);
 //       case 'Rock':
-//         return Color(0xFFB8A038);
+//         return Color(0xFFB8A038).withOpacity(opacity);
 //       case 'Ghost':
-//         return Color(0xFF705998);
+//         return Color(0xFF705998).withOpacity(opacity);
 //       case 'Dark':
-//         return Color(0xFF6F5848);
+//         return Color(0xFF6F5848).withOpacity(opacity);
 //       case 'Dragon':
-//         return Color(0xFF7138F8);
+//         return Color(0xFF7138F8).withOpacity(opacity);
 //       case 'Steel':
-//         return Color(0xFFB8B8D0);
+//         return Color(0xFFB8B8D0).withOpacity(opacity);
 //       case 'Fairy':
-//         return Color(0xFFA890F0);
+//         return Color(0xFFA890F0).withOpacity(opacity);
 //       default:
-//         return Colors.grey;
+//         return Colors.transparent.withOpacity(opacity);
 //     }
 //   }
+
 // }
+
+
+  Color pokemonItem(String type) {
+    switch (type) {
+      case 'Normal':
+        return Color(0xFFA7A877);
+      case 'Fire':
+        return Color(0xFFFB6C6C);
+      case 'Water':
+        return Color(0xFF77BDFE);
+      case 'Grass':
+        return Color(0xFF48D0B0);
+      case 'Electric':
+        return Color(0xFFFFCE4B);
+      case 'Ice':
+        return Color(0xFF99D7D8);
+      case 'Fighting':
+        return Color(0xFFC03128);
+      case 'Poison':
+        return Color(0xFF9F419F);
+      case 'Ground':
+        return Color(0xFFE1C068);
+      case 'Flying':
+        return Color(0xFFA890F0);
+      case 'Psychic':
+        return Color(0xFFF95887);
+      case 'Bug':
+        return Color(0xFFA8B91F);
+      case 'Rock':
+        return Color(0xFFB8A038);
+      case 'Ghost':
+        return Color(0xFF705998);
+      case 'Dark':
+        return Color(0xFF6F5848);
+      case 'Dragon':
+        return Color(0xFF7138F8);
+      case 'Steel':
+        return Color(0xFFB8B8D0);
+      case 'Fairy':
+        return Color(0xFFA890F0);
+      default:
+        return Colors.grey;
+    }
+  }
+}
+
+
+class AppTheme {
+  static AppColors get colors => const AppColorsLight();
+
+  static AppColors getColors(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.light
+        ? const AppColorsLight()
+        : const AppColorsDark();
+  }
+   static const Color primaryColor = Color.fromARGB(255, 235, 198, 90);
+  static const Color textButtonColor = Color.fromARGB(255, 236, 236, 234);
+}
+
+
+
+
+class FormColors{
+  static const  Color fieldBackgroundColor = Colors.white;
+  static const Color fieldTextcolor = Colors.white;
+
+}
+
+
+
+
+
 
 // Color pokemonItem(String type, {double opacity = 1.0}) {
 //   switch (type) {
@@ -137,71 +211,3 @@ abstract class AppColors {
 //         return Colors.transparent.withOpacity(opacity);
 //   }
 // }
-
- Color pokemonItem(String type, {double opacity = 1.0}) {
-    switch (type) {
-      case 'Normal':
-        return Color(0xFFA7A877).withOpacity(opacity);
-      case 'Fire':
-        return Color(0xFFFB6C6C).withOpacity(opacity);
-      case 'Water':
-        return Color(0xFF77BDFE).withOpacity(opacity);
-      case 'Grass':
-        return Color(0xFF48D0B0).withOpacity(opacity);
-      case 'Electric':
-        return Color(0xFFFFCE4B).withOpacity(opacity);
-      case 'Ice':
-        return Color(0xFF99D7D8).withOpacity(opacity);
-      case 'Fighting':
-        return Color(0xFFC03128).withOpacity(opacity);
-      case 'Poison':
-        return Color(0xFF9F419F).withOpacity(opacity);
-      case 'Ground':
-        return Color(0xFFE1C068).withOpacity(opacity);
-      case 'Flying':
-        return Color(0xFFA890F0).withOpacity(opacity);
-      case 'Psychic':
-        return Color(0xFFF95887).withOpacity(opacity);
-      case 'Bug':
-        return Color(0xFFA8B91F).withOpacity(opacity);
-      case 'Rock':
-        return Color(0xFFB8A038).withOpacity(opacity);
-      case 'Ghost':
-        return Color(0xFF705998).withOpacity(opacity);
-      case 'Dark':
-        return Color(0xFF6F5848).withOpacity(opacity);
-      case 'Dragon':
-        return Color(0xFF7138F8).withOpacity(opacity);
-      case 'Steel':
-        return Color(0xFFB8B8D0).withOpacity(opacity);
-      case 'Fairy':
-        return Color(0xFFA890F0).withOpacity(opacity);
-      default:
-        return Colors.transparent.withOpacity(opacity);
-    }
-  }
-
-}
-
-
-
-class AppTheme {
-  static AppColors get colors => const AppColorsLight();
-
-  static AppColors getColors(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.light
-        ? const AppColorsLight()
-        : const AppColorsDark();
-  }
-   static const Color primaryColor = Color.fromARGB(255, 235, 198, 90);
-  static const Color textButtonColor = Color.fromARGB(255, 236, 236, 234);
-}
-
-
-
-
-class FormColors{
-  static const  Color fieldBackgroundColor = Colors.white;
-  static const Color fieldTextcolor = Colors.white;
-
-}

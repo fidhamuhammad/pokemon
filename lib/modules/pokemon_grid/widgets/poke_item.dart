@@ -63,7 +63,7 @@ class _PokeItemWidgetState extends State<PokeItemWidget> {
         decoration: BoxDecoration(
           color: AppTheme.getColors(context)
               .pokemonItem(widget.pokemon.types[0])
-              .withOpacity(0.1),
+              .withOpacity(0.9),
           borderRadius: BorderRadius.circular(15),
         ),
         child: ClipRRect(

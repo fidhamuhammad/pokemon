@@ -1,15 +1,16 @@
 import 'dart:ui';
 
 import 'package:app/modules/pokemon_grid/wishlist/wishlist.dart';
+import 'package:app/shared/ui/widgets/gradient/continer_gradient.dart';
+import 'package:app/shared/ui/widgets/sliver_appbar/pokedexappbar.dart';
 import 'package:app/shared/ui/widgets/sliver_appbar/sliver_appbar.dart';
-import 'package:app/shared/ui/widgets/textButton.dart';
+import 'package:app/shared/ui/widgets/sliver_appbar/sliver_box.dart';
 import 'package:app/shared/utils/spacer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:glass_kit/glass_kit.dart';
-import 'package:glassmorphism/glassmorphism.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:app/modules/pokemon_grid/widgets/pokemon_grid.dart';
@@ -41,86 +42,77 @@ class _PokemonGridPageState extends State<PokemonGridPage> {
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
 
-    
-
     return Scaffold(
+      // backgroundColor: Color.fromARGB(255, 17, 37, 148),
+      // extendBodyBehindAppBar: true,
       body: Stack(
         children: [
-          // Background Image with Frosted Glass Overlay
-          Image.asset(
-            'assets/images/pokebg.png', // Replace with your image
-            height: double.infinity,
-            width: double.infinity,
-            fit: BoxFit.cover,
-          ),
-          BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(
-              color: Colors.black.withOpacity(0.5), // Adjust the opacity as needed
-              height: double.infinity,
-              width: double.infinity,
-            ),
-          ),
-          CustomScrollView(
-            slivers: [
-              CustomSliverAppbar(),
-              SliverToBoxAdapter(
-                child:  hSpace(16),
-              ),
-              Observer(
-                builder: (_) {
-                  if (_pokemonStore.pokemonsSummary == null) {
-                    return SliverFillRemaining(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircularProgressIndicator(),
-                        ],
-                      ),
-                    );
-                  } else {
-                    if (_pokemonStore.pokemonFilter.pokemonNameNumberFilter !=
-                            null &&
-                        _pokemonStore.pokemonsSummary!.isEmpty) {
-                      return SliverToBoxAdapter(
-                        child: Container(
-                          height: 250,
-                          width: 250,
-                          child: Stack(
-                            children: [
-                              Center(
-                                child: Lottie.asset(
-                                  AppConstants.pikachuLottie,
-                                ),
-                              ),
-                              Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 30),
-                                  child: Text(
-                                    "${_pokemonStore.pokemonFilter.pokemonNameNumberFilter} was not found",
-                                    style: GoogleFonts.lora(
-                                      color: Colors.lime,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+                   
+          CustomGradientContainer(
+            begin: Alignment.bottomLeft,
+            end: Alignment.bottomLeft,
+            child: CustomScrollView(
+              slivers: [
+                PokedexAppBar(),
+                // SliverSearch(),
+                SliverToBoxAdapter(
+                  child: hSpace(16),
+                ),
+                Observer(
+                  builder: (_) {
+                    if (_pokemonStore.pokemonsSummary == null) {
+                      return SliverFillRemaining(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircularProgressIndicator(),
+                          ],
                         ),
                       );
+                    } else {
+                      if (_pokemonStore.pokemonFilter.pokemonNameNumberFilter !=
+                              null &&
+                          _pokemonStore.pokemonsSummary!.isEmpty) {
+                        return SliverToBoxAdapter(
+                          child: Container(
+                            height: 250,
+                            width: 250,
+                            child: Stack(
+                              children: [
+                                Center(
+                                  child: Lottie.asset(
+                                    AppConstants.pikachuLottie,
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 30),
+                                    child: Text(
+                                      "${_pokemonStore.pokemonFilter.pokemonNameNumberFilter} was not found",
+                                      style: GoogleFonts.lora(
+                                        color: Colors.lime,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      }
+            
+                      return SliverPadding(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        sliver: PokemonGridWidget(pokemonStore: _pokemonStore),
+                      );
                     }
-
-                    return SliverPadding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      sliver: PokemonGridWidget(pokemonStore: _pokemonStore),
-                    );
-                  }
-                },
-              ),
-            ],
+                  },
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -128,23 +120,21 @@ class _PokemonGridPageState extends State<PokemonGridPage> {
       floatingActionButton: GlassContainer.clearGlass(
         height: 60,
         width: 60,
+        color: Color.fromARGB(255, 190, 220, 245),
         borderRadius: BorderRadius.circular(30), // Half of the height or width
-        child: GlassContainer.frostedGlass(
-          height: 60,
-          width: 60,
-          borderRadius: BorderRadius.circular(30), // Half of the height or width
-          child: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FavouriteScreen(),
-                ),
-              );
-            },
-            child: Icon(Icons.favorite, color: Colors.white), // Set the color as needed
-            backgroundColor: Colors.transparent, // Set the background color as transparent
-          ),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => FavoritePage(),
+              ),
+            );
+          },
+          child: Icon(Icons.favorite,
+              color: Colors.white), // Set the color as needed
+          backgroundColor:
+              Color.fromARGB(255, 144, 174, 235).withOpacity(0.03), // Set the background color as transparent
         ),
       ),
 
